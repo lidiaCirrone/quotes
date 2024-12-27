@@ -29,7 +29,7 @@ export default function Quotes() {
 
   const filteredQuotes = useMemo(() => {
     const keywords = filter.saved.split(" ")
-    return allQuotes.filter(item => filter.saved === "" || (keywords.some(word => item.author.toLowerCase().includes(word) || item.quote.toLowerCase().includes(word))))
+    return allQuotes.filter(item => filter.saved === "" || (keywords.some(word => item.author.toLowerCase().includes(word.toLowerCase()) || item.quote.toLowerCase().includes(word.toLowerCase()))))
   }, [allQuotes.length, filter.saved, filter.current])
 
   const addQuote = () => {
@@ -88,9 +88,9 @@ export default function Quotes() {
       {allQuotes.length > 0 && (
         <div className="flex items-center justify-end gap-2 mt-8">
           <label htmlFor="filter">Filter by: </label>
-          <input type="text" name="filter" id="filter" className="w-32 border-2 rounded-lg border-grey" value={filter.current} onChange={onFilterChange} />
-          <TbFilterCheck onClick={handleFilterApply} className="hover:opacity-80 cursor-pointer" />
-          <TbFilterX onClick={handleFilterRemove} className="hover:opacity-80 cursor-pointer" />
+          <input type="text" name="filter" id="filter" className="w-28 border-2 rounded-lg border-grey" value={filter.current} onChange={onFilterChange} />
+          <TbFilterCheck onClick={handleFilterApply} className="hover:opacity-80 cursor-pointer" size={20} />
+          <TbFilterX onClick={handleFilterRemove} className="hover:opacity-80 cursor-pointer" size={20} />
         </div>
       )}
 
@@ -100,7 +100,7 @@ export default function Quotes() {
             <p>{item.quote}</p>
             {item.author && <p className="italic">— {item.author}</p>}
           </div>
-          <TbCopy onClick={handleCopy(item)} className="mt-3 hover:opacity-80 cursor-pointer" />
+          <TbCopy onClick={handleCopy(item)} className="mt-3 hover:opacity-80 cursor-pointer" size={20} />
         </div>
       ))}
     </>

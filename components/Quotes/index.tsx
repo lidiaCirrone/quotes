@@ -5,12 +5,15 @@ import { Quote } from "@/utils/types";
 import clsx from "clsx";
 import { ChangeEvent, useMemo, useState } from "react";
 
+const emptyQuote = {
+  author: '',
+  date: Date.now(),
+  quote: ''
+}
+
 export default function Quotes() {
 
-  const [quoteData, setQuoteData] = useState<Quote>({
-    author: '',
-    quote: ''
-  })
+  const [quoteData, setQuoteData] = useState<Quote>(emptyQuote)
 
   const [allQuotes, setAllQuotes] = useState<Quote[]>(storedQuotes.getAll())
 
@@ -18,11 +21,13 @@ export default function Quotes() {
 
   const addQuote = () => {
     const newQuote = {
-      author: quoteData.author, quote: quoteData.quote
+      author: quoteData.author, 
+      date: Date.now(), 
+      quote: quoteData.quote
     }
     setAllQuotes(prev => ([...prev, newQuote]))
     storedQuotes.add(newQuote)
-    setQuoteData({author: '', quote: ''})
+    setQuoteData(emptyQuote)
   }
 
   const handleChange = (field: 'author' | 'quote') => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -41,7 +46,7 @@ export default function Quotes() {
       <textarea value={quoteData.quote} className="border-2 rounded-lg p-2 border-grey" onChange={handleChange('quote')}></textarea>
       <button className={clsx("rounded-lg p-1 ", isButtonDisabled ? 'bg-gray-400 text-white' : 'bg-sky-300 text-black hover:opacity-80')} onClick={addQuote} disabled={isButtonDisabled}>Add new quote</button>
 
-      {allQuotes.map((item: Quote, i: number) => (
+      {allQuotes.sort((a, b) => b.date - a.date).map((item: Quote, i: number) => (
         <div key={`quote-${i}`}>
           {item.author && <p>Author: {item.author}</p>}
           <p>Content: {item.quote}</p>

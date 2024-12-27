@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Afacad_Flux, DM_Serif_Display } from "next/font/google";
+import { Toaster } from 'react-hot-toast';
 import "./globals.css";
 
 const afacadFluxSans = Afacad_Flux({
@@ -28,6 +29,9 @@ export default function RootLayout({
       <body
         className={`${afacadFluxSans.variable} ${dmSerifDisplay.variable} antialiased`}
       >
+        <Toaster toastOptions={{
+          className: "font-sans"
+        }} />
         {children}
       </body>
     </html>

@@ -4,7 +4,8 @@ import { storedQuotes } from "@/utils/storage";
 import { Filter, Quote } from "@/utils/types";
 import clsx from "clsx";
 import { ChangeEvent, useMemo, useState } from "react";
-import { TbFilterCheck, TbFilterX } from "react-icons/tb";
+import toast from "react-hot-toast";
+import { TbCopy, TbFilterCheck, TbFilterX } from "react-icons/tb";
 
 
 const emptyQuote = {
@@ -50,6 +51,16 @@ export default function Quotes() {
     }))
   }
 
+  const handleCopy = (item: Quote) => () => {
+    try {
+      navigator.clipboard.writeText(`${item.quote}
+(Author ${item.author !== "" ? item.author : 'unknown'})`)
+      toast.success("The quote was copied!", {})
+    } catch (error) {
+      toast.error("Something went wrong :(")
+    }
+  }
+
   const handleFilterApply = () => {
     setFilter(prev => ({ ...prev, saved: prev.current }))
   }
@@ -84,9 +95,12 @@ export default function Quotes() {
       )}
 
       {filteredQuotes.sort((a, b) => b.date - a.date).map((item: Quote, i: number) => (
-        <div key={`quote-${i}`} className="bg-gray-200 p-2 rounded-lg">
-          {item.author && <p className="italic">by {item.author}</p>}
-          <p>{item.quote}</p>
+        <div key={`quote-${i}`} className="flex gap-2">
+          <div className="bg-gray-200 p-2 rounded-lg w-full">
+            <p>{item.quote}</p>
+            {item.author && <p className="italic">— {item.author}</p>}
+          </div>
+          <TbCopy onClick={handleCopy(item)} className="mt-3 hover:opacity-80 cursor-pointer" />
         </div>
       ))}
     </>

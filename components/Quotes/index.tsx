@@ -74,7 +74,8 @@ export default function Quotes() {
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-4 md:max-w-64 w-full md:mx-auto">
+      <h1 className="text-3xl font-bold">Quotes</h1>
       <div className="flex flex-col gap-2">
         <label htmlFor="author">Author: </label>
         <input type="text" name="author" id="author" className="border-2 rounded-lg border-grey" value={quoteData.author} onChange={handleChange('author')} />
@@ -103,6 +104,6 @@ export default function Quotes() {
           <TbCopy onClick={handleCopy(item)} className="mt-3 hover:opacity-80 cursor-pointer" size={20} />
         </div>
       ))}
-    </>
+    </div>
   );
 }

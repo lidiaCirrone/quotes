@@ -12,9 +12,13 @@ const webStorage = {
 };
 
 export const storedQuotes = {
-  getAll: () => webStorage.getArray(STORED_QUOTES_KEY),
   add: (newQuote: Quote) => {
     const currentQuotes = webStorage.getArray(STORED_QUOTES_KEY);
     webStorage.set(STORED_QUOTES_KEY, [...currentQuotes, newQuote]);
   },
+  getAll: () => webStorage.getArray(STORED_QUOTES_KEY),
+  getLastId: () => {
+    const currentQuotes = webStorage.getArray(STORED_QUOTES_KEY)
+    return currentQuotes.length > 0 ? currentQuotes[currentQuotes.length-1].id : 0
+  }
 };

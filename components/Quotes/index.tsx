@@ -7,8 +7,8 @@ import clsx from "clsx";
 import { ChangeEvent, useContext, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { TbCopy, TbFilterCheck, TbFilterX } from "react-icons/tb";
-import { Tooltip } from "react-tooltip";
 import QuoteCard from "@/components/ui/QuoteCard";
+import IconWrapper from "@/components/ui/IconWrapper";
 
 
 const emptyQuote = {
@@ -58,7 +58,7 @@ export default function Quotes() {
     try {
       navigator.clipboard.writeText(`${item.quote}
 (Author ${item.author !== "" ? item.author : 'unknown'})`)
-      toast.success("The quote was copied!", {})
+      toast.success("The quote was successfully copied!", {})
     } catch (error) {
       toast.error("Something went wrong :(")
     }
@@ -93,24 +93,38 @@ export default function Quotes() {
         <div className="flex items-center justify-end gap-2 mt-8">
           <label htmlFor="filter">Filter by: </label>
           <input type="text" name="filter" id="filter" className="w-28 border-2 rounded-lg border-grey" value={filter.current} onChange={onFilterChange} />
-          <Tooltip anchorSelect="#apply-filter-tooltip" place="bottom">
-            Apply filter
-          </Tooltip>
-          <TbFilterCheck onClick={handleFilterApply} className="hover:opacity-80 cursor-pointer" size={20} id="apply-filter-tooltip" />
-          <Tooltip anchorSelect="#remove-filter-tooltip" place="bottom">
-            Remove filter
-          </Tooltip>
-          <TbFilterX onClick={handleFilterRemove} className="hover:opacity-80 cursor-pointer" size={20} id="remove-filter-tooltip" />
+          <IconWrapper
+            disabled={filter.current.trim() === ""}
+            IconComponent={TbFilterCheck}
+            onClick={handleFilterApply}
+            tooltip={{
+              triggerId: "apply-filter-tooltip",
+              text: "Apply filter"
+            }}
+          />
+          <IconWrapper
+            IconComponent={TbFilterX}
+            onClick={handleFilterRemove}
+            tooltip={{
+              triggerId: "remove-filter-tooltip",
+              text: "Remove filter"
+            }}
+          />
         </div>
       )}
 
       {filteredQuotes.sort((a, b) => b.date - a.date).map((item: Quote, i: number) => (
         <div key={`quote-${i}`} className="flex gap-2">
           <QuoteCard author={item.author} text={item.quote} className="md:max-w-80" />
-          <Tooltip anchorSelect="#copy-quote-tooltip" place="bottom">
-            Copy this quote
-          </Tooltip>
-          <TbCopy onClick={handleCopy(item)} className="mt-3 hover:opacity-80 cursor-pointer" size={20} id="copy-quote-tooltip" />
+          <IconWrapper
+            className="mt-3"
+            IconComponent={TbCopy}
+            onClick={handleCopy(item)}
+            tooltip={{
+              triggerId: "copy-quote-tooltip",
+              text: "Copy this quote"
+            }}
+          />
         </div>
       ))}
     </div>

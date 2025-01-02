@@ -37,7 +37,7 @@ export default function IconWrapper({
         </Tooltip>
       }
       <IconComponent
-        {...!disabled && { onClick }}
+        {...(!disabled && onClick) && { onClick }}
         className={clsx(
           "focus:outline-none",
           disabled ? "opacity-30" : "hover:opacity-80 cursor-pointer",

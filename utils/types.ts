@@ -13,9 +13,6 @@ export type Filter = {
 export type RandomQuoteFromApi = {
   quoteText: string;
   quoteAuthor: string;
-  senderName: string;
-  senderLink: string;
-  quoteLink: string;
 };
 
 export type RandomProgrammingQuoteFromApi = {

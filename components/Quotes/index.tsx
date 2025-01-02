@@ -1,9 +1,10 @@
 'use client'
 
+import { QuotesContext } from "@/store/quotes-provider";
 import { storedQuotes } from "@/utils/storage";
 import { Filter, Quote } from "@/utils/types";
 import clsx from "clsx";
-import { ChangeEvent, useMemo, useState } from "react";
+import { ChangeEvent, useContext, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { TbCopy, TbFilterCheck, TbFilterX } from "react-icons/tb";
 import { Tooltip } from "react-tooltip";
@@ -24,7 +25,7 @@ export default function Quotes() {
     current: ""
   })
 
-  const [allQuotes, setAllQuotes] = useState<Quote[]>(storedQuotes.getAll())
+  const { allQuotes, setAllQuotes } = useContext(QuotesContext)
 
   const isButtonDisabled = useMemo(() => quoteData.quote.trim() === '', [quoteData.quote])
 
@@ -40,7 +41,7 @@ export default function Quotes() {
       id: storedQuotes.getLastId() + 1,
       quote: quoteData.quote
     }
-    setAllQuotes(prev => ([...prev, newQuote]))
+    setAllQuotes((prev: Quote[]) => ([...prev, newQuote]))
     storedQuotes.add(newQuote)
     setQuoteData(emptyQuote)
   }

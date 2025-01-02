@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { ChangeEvent, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { TbCopy, TbFilterCheck, TbFilterX } from "react-icons/tb";
+import { Tooltip } from "react-tooltip";
 
 
 const emptyQuote = {
@@ -90,8 +91,14 @@ export default function Quotes() {
         <div className="flex items-center justify-end gap-2 mt-8">
           <label htmlFor="filter">Filter by: </label>
           <input type="text" name="filter" id="filter" className="w-28 border-2 rounded-lg border-grey" value={filter.current} onChange={onFilterChange} />
-          <TbFilterCheck onClick={handleFilterApply} className="hover:opacity-80 cursor-pointer" size={20} />
-          <TbFilterX onClick={handleFilterRemove} className="hover:opacity-80 cursor-pointer" size={20} />
+          <Tooltip anchorSelect="#apply-filter-tooltip" place="bottom">
+            Apply filter
+          </Tooltip>
+          <TbFilterCheck onClick={handleFilterApply} className="hover:opacity-80 cursor-pointer" size={20} id="apply-filter-tooltip" />
+          <Tooltip anchorSelect="#remove-filter-tooltip" place="bottom">
+            Remove filter
+          </Tooltip>
+          <TbFilterX onClick={handleFilterRemove} className="hover:opacity-80 cursor-pointer" size={20} id="remove-filter-tooltip" />
         </div>
       )}
 
@@ -101,7 +108,10 @@ export default function Quotes() {
             <p>{item.quote}</p>
             {item.author && <p className="italic">— {item.author}</p>}
           </div>
-          <TbCopy onClick={handleCopy(item)} className="mt-3 hover:opacity-80 cursor-pointer" size={20} />
+          <Tooltip anchorSelect="#copy-quote-tooltip" place="bottom">
+            Copy this quote
+          </Tooltip>
+          <TbCopy onClick={handleCopy(item)} className="mt-3 hover:opacity-80 cursor-pointer" size={20} id="copy-quote-tooltip" />
         </div>
       ))}
     </div>

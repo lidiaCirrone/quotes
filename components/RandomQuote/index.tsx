@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect, useState } from "react"
+import { Tooltip } from 'react-tooltip'
 import { getRandomQuoteFromApi } from "@/services/api"
 import { Quote } from "@/utils/types"
+import { HIDE_RANDOM_QUOTE, webStorage } from "@/utils/storage";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { BiHide } from "react-icons/bi";
-import { HIDE_RANDOM_QUOTE, webStorage } from "@/utils/storage";
 
 export default function RandomQuote() {
 
@@ -52,10 +53,19 @@ export default function RandomQuote() {
     </div>
     <div className="flex flex-col justify-between">
       <div className="flex flex-col">
-        <AiOutlineLike onClick={handleAccept} className="text-green-600 mt-3 hover:opacity-80 cursor-pointer" size={20} />
-        <AiOutlineDislike onClick={handleDismiss} className="text-red-600 mt-3 hover:opacity-80 cursor-pointer" size={20} />
+        <Tooltip anchorSelect="#accept-tooltip" place="bottom">
+          Add this quote to your own
+        </Tooltip>
+        <AiOutlineLike onClick={handleAccept} className="text-green-600 mt-3 hover:opacity-80 cursor-pointer" size={20} id="accept-tooltip" />
+        <Tooltip anchorSelect="#dismiss-tooltip" place="bottom">
+          Hide this quote
+        </Tooltip>
+        <AiOutlineDislike onClick={handleDismiss} className="text-red-600 mt-3 hover:opacity-80 cursor-pointer" size={20} id="dismiss-tooltip" />
       </div>
-      <BiHide onClick={handleDontShowAnymore} className="text-black self-end	 hover:opacity-80 cursor-pointer" size={20} />
+      <Tooltip anchorSelect="#dont-show-anymore-tooltip" place="bottom">
+        Don't show suggestions anymore
+      </Tooltip>
+      <BiHide onClick={handleDontShowAnymore} className="text-black self-end	 hover:opacity-80 cursor-pointer" size={20} id="dont-show-anymore-tooltip" />
     </div>
   </div>
 }

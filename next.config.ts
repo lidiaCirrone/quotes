@@ -4,10 +4,11 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/api/:path*',
-        destination: 'https://programming-quotes-api.azurewebsites.net/api/quotes/:path*',
+        source: "/api/:path*",
+        destination:
+          "https://programming-quotes-api.azurewebsites.net/api/quotes/:path*",
       },
-    ]
+    ];
   },
 };
 

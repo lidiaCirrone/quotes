@@ -1,5 +1,7 @@
 'use client'
 
+import IconWrapper from "@/components/ui/IconWrapper";
+import QuoteCard from "@/components/ui/QuoteCard";
 import { QuotesContext } from "@/store/quotes-provider";
 import { storedQuotes } from "@/utils/storage";
 import { Filter, Quote } from "@/utils/types";
@@ -7,8 +9,6 @@ import clsx from "clsx";
 import { ChangeEvent, useContext, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { TbCopy, TbFilterCheck, TbFilterX } from "react-icons/tb";
-import QuoteCard from "@/components/ui/QuoteCard";
-import IconWrapper from "@/components/ui/IconWrapper";
 
 
 const emptyQuote = {

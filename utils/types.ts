@@ -16,10 +16,10 @@ export type RandomQuoteFromApi = {
 };
 
 export type RandomProgrammingQuoteFromApi = {
-  "_id": string,
-  "text": string,
-  "author": string,
-  "source": string,
-  "numberOfVotes": number,
-  "rating": number
-}
+  _id: string;
+  text: string;
+  author: string;
+  source: string;
+  numberOfVotes: number;
+  rating: number;
+};

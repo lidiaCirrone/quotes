@@ -8,8 +8,8 @@ export default {
   ],
   theme: {
     fontFamily: {
-      'sans': ['var(--font-afacad-flux-sans)', 'ui-sans-serif', 'system-ui'],
-      'serif': ['var(--font-dm-serif-display)', 'ui-serif', 'Georgia'],
+      sans: ["var(--font-afacad-flux-sans)", "ui-sans-serif", "system-ui"],
+      serif: ["var(--font-dm-serif-display)", "ui-serif", "Georgia"],
     },
     extend: {
       colors: {

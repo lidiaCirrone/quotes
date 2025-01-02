@@ -1,8 +1,8 @@
 'use client'
 
-import { PlacesType, Tooltip } from 'react-tooltip'
-import { IconType } from "react-icons"
 import clsx from "clsx"
+import { IconType } from "react-icons"
+import { PlacesType, Tooltip } from 'react-tooltip'
 
 interface IconWrapperProps {
   className?: string,

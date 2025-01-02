@@ -19,7 +19,9 @@ export const storedQuotes = {
   },
   getAll: () => webStorage.getArray(STORED_QUOTES),
   getLastId: () => {
-    const currentQuotes = webStorage.getArray(STORED_QUOTES)
-    return currentQuotes.length > 0 ? currentQuotes[currentQuotes.length-1].id : 0
-  }
+    const currentQuotes = webStorage.getArray(STORED_QUOTES);
+    return currentQuotes.length > 0
+      ? currentQuotes[currentQuotes.length - 1].id
+      : 0;
+  },
 };

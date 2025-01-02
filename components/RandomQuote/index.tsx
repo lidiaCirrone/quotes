@@ -1,14 +1,14 @@
 'use client'
 
-import { useContext, useEffect, useState } from "react"
-import { getRandomQuoteFromApi } from "@/services/api"
-import { RandomQuoteFromApi } from "@/utils/types"
+import IconWrapper from "@/components/ui/IconWrapper";
+import QuoteCard from "@/components/ui/QuoteCard";
+import { getRandomQuoteFromApi } from "@/services/api";
+import { QuotesContext } from "@/store/quotes-provider";
 import { HIDE_RANDOM_QUOTE, storedQuotes, webStorage } from "@/utils/storage";
+import { RandomQuoteFromApi } from "@/utils/types";
+import { useContext, useEffect, useState } from "react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { BiHide } from "react-icons/bi";
-import { QuotesContext } from "@/store/quotes-provider"
-import QuoteCard from "@/components/ui/QuoteCard"
-import IconWrapper from "@/components/ui/IconWrapper"
 
 export default function RandomQuote() {
 

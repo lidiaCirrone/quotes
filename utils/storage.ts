@@ -1,24 +1,25 @@
 import { Quote } from "./types";
 
-export const STORED_QUOTES_KEY = "quotes-app-data";
+export const STORED_QUOTES = "quotes-app-data";
+export const HIDE_RANDOM_QUOTE = "quotes-app-hide-random";
 
-const webStorage = {
+export const webStorage = {
   get: (key: string) =>
     localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)!) : null,
   getArray: (key: string) =>
     localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)!) : [],
-  set: (key: string, value: Quote | Quote[]) =>
+  set: (key: string, value: Quote | Quote[] | boolean) =>
     localStorage.setItem(key, JSON.stringify(value)),
 };
 
 export const storedQuotes = {
   add: (newQuote: Quote) => {
-    const currentQuotes = webStorage.getArray(STORED_QUOTES_KEY);
-    webStorage.set(STORED_QUOTES_KEY, [...currentQuotes, newQuote]);
+    const currentQuotes = webStorage.getArray(STORED_QUOTES);
+    webStorage.set(STORED_QUOTES, [...currentQuotes, newQuote]);
   },
-  getAll: () => webStorage.getArray(STORED_QUOTES_KEY),
+  getAll: () => webStorage.getArray(STORED_QUOTES),
   getLastId: () => {
-    const currentQuotes = webStorage.getArray(STORED_QUOTES_KEY)
+    const currentQuotes = webStorage.getArray(STORED_QUOTES)
     return currentQuotes.length > 0 ? currentQuotes[currentQuotes.length-1].id : 0
   }
 };

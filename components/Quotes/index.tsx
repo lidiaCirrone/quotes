@@ -77,7 +77,7 @@ export default function Quotes() {
   }
 
   return (
-    <div className="flex flex-col gap-4 md:max-w-64 w-full md:mx-auto">
+    <div className="flex flex-col gap-4 w-full">
       <h1 className="text-3xl font-bold">Quotes</h1>
       <div className="flex flex-col gap-2">
         <label htmlFor="author">Author: </label>

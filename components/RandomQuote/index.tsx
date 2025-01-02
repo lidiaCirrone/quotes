@@ -8,6 +8,7 @@ import { HIDE_RANDOM_QUOTE, storedQuotes, webStorage } from "@/utils/storage";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { BiHide } from "react-icons/bi";
 import { QuotesContext } from "@/store/quotes-provider"
+import QuoteCard from "@/components/QuoteCard"
 
 export default function RandomQuote() {
 
@@ -54,10 +55,7 @@ export default function RandomQuote() {
   if (hideRandomQuote || !randomQuote) return null
 
   return <div className="flex gap-2 mb-8">
-    <div className="flex flex-col p-2 bg-gray-200 rounded-lg gap-4 md:max-w-80 w-full">
-      <p>{randomQuote.quoteText}</p>
-      <p>{randomQuote.quoteAuthor}</p>
-    </div>
+    <QuoteCard author={randomQuote.quoteAuthor} text={randomQuote.quoteText} className="md:max-w-80" />
     <div className="flex flex-col justify-between">
       <div className="flex flex-col">
         <Tooltip anchorSelect="#accept-tooltip" place="bottom">

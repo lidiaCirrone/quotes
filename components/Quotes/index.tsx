@@ -8,6 +8,7 @@ import { ChangeEvent, useContext, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { TbCopy, TbFilterCheck, TbFilterX } from "react-icons/tb";
 import { Tooltip } from "react-tooltip";
+import QuoteCard from "@/components/QuoteCard";
 
 
 const emptyQuote = {
@@ -105,10 +106,7 @@ export default function Quotes() {
 
       {filteredQuotes.sort((a, b) => b.date - a.date).map((item: Quote, i: number) => (
         <div key={`quote-${i}`} className="flex gap-2">
-          <div className="bg-gray-200 p-2 rounded-lg w-full">
-            <p>{item.quote}</p>
-            {item.author && <p className="italic">— {item.author}</p>}
-          </div>
+          <QuoteCard author={item.author} text={item.quote} className="md:max-w-80" />
           <Tooltip anchorSelect="#copy-quote-tooltip" place="bottom">
             Copy this quote
           </Tooltip>

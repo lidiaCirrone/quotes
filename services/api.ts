@@ -1,7 +1,9 @@
-export async function getRandomQuoteFromApi() {
+import { RandomQuoteFromApi } from "@/utils/types";
+
+export async function getRandomQuoteFromApi(): Promise<RandomQuoteFromApi | null> {
   try {
     const response = await fetch(
-      "http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en"
+      "api/1.0/?method=getQuote&format=json&lang=en"
     );
     const content = await response.json();
     return content;

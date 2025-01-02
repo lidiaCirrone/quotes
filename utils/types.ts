@@ -6,6 +6,14 @@ export type Quote = {
 };
 
 export type Filter = {
-  saved: string,
-  current: string
-}
+  saved: string;
+  current: string;
+};
+
+export type RandomQuoteFromApi = {
+  quoteText: string;
+  quoteAuthor: string;
+  senderName: string;
+  senderLink: string;
+  quoteLink: string;
+};

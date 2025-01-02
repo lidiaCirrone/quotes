@@ -11,7 +11,6 @@ export default function RandomQuote() {
 
   async function getRandomQuote() {
     const newRandom = await getRandomQuoteFromApi()
-    console.log("getRandomQuote newRandom", newRandom)
     if (newRandom) {
       setRandomQuote({
         author: newRandom.quoteAuthor,
@@ -23,7 +22,6 @@ export default function RandomQuote() {
   }
 
   useEffect(() => {
-    console.log("getRandomQuote")
     getRandomQuote()
   }, [])
 

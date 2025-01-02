@@ -8,7 +8,7 @@ import { ChangeEvent, useContext, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { TbCopy, TbFilterCheck, TbFilterX } from "react-icons/tb";
 import { Tooltip } from "react-tooltip";
-import QuoteCard from "@/components/QuoteCard";
+import QuoteCard from "@/components/ui/QuoteCard";
 
 
 const emptyQuote = {

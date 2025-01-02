@@ -8,7 +8,7 @@ import { HIDE_RANDOM_QUOTE, storedQuotes, webStorage } from "@/utils/storage";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { BiHide } from "react-icons/bi";
 import { QuotesContext } from "@/store/quotes-provider"
-import QuoteCard from "@/components/QuoteCard"
+import QuoteCard from "@/components/ui/QuoteCard"
 
 export default function RandomQuote() {
 

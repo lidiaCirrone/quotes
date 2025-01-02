@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Tooltip } from 'react-tooltip'
 import { getRandomQuoteFromApi } from "@/services/api"
 import { Quote } from "@/utils/types"
-import { HIDE_RANDOM_QUOTE, webStorage } from "@/utils/storage";
+import { HIDE_RANDOM_QUOTE, storedQuotes, webStorage } from "@/utils/storage";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { BiHide } from "react-icons/bi";
 
@@ -30,8 +30,19 @@ export default function RandomQuote() {
   }, [])
 
   const handleAccept = () => {
-    // TODO
-    console.log("accept this note")
+    if (randomQuote) {
+
+      const newQuote = {
+        author: randomQuote.author,
+        date: Date.now(),
+        id: storedQuotes.getLastId() + 1,
+        quote: randomQuote.quote
+      }
+      // TODO update list!
+      // setAllQuotes(prev => ([...prev, newQuote]))
+      storedQuotes.add(newQuote)
+      // setQuoteData(emptyQuote)
+    }
   }
 
   const handleDismiss = () => {

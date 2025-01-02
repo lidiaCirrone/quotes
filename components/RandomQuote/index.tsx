@@ -13,10 +13,10 @@ export default function RandomQuote() {
     const newRandom = await getRandomQuoteFromApi()
     if (newRandom) {
       setRandomQuote({
-        author: newRandom.quoteAuthor,
+        author: newRandom.author,
         date: Date.now(),
         id: 0, // TODO check
-        quote: newRandom.quoteText,
+        quote: newRandom.text,
       })
     }
   }

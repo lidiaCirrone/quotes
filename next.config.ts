@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://api.forismatic.com/api/1.0/:path*',
+        destination: 'https://programming-quotes-api.azurewebsites.net/api/quotes/:path*',
       },
     ]
   },

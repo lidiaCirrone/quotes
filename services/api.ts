@@ -1,10 +1,8 @@
-import { RandomQuoteFromApi } from "@/utils/types";
+import { RandomProgrammingQuoteFromApi } from "@/utils/types";
 
-export async function getRandomQuoteFromApi(): Promise<RandomQuoteFromApi | null> {
+export async function getRandomQuoteFromApi(): Promise<RandomProgrammingQuoteFromApi | null> {
   try {
-    const response = await fetch(
-      "api/1.0/?method=getQuote&format=json&lang=en"
-    );
+    const response = await fetch("api/random");
     const content = await response.json();
     return content;
   } catch (error) {

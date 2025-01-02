@@ -17,3 +17,12 @@ export type RandomQuoteFromApi = {
   senderLink: string;
   quoteLink: string;
 };
+
+export type RandomProgrammingQuoteFromApi = {
+  "_id": string,
+  "text": string,
+  "author": string,
+  "source": string,
+  "numberOfVotes": number,
+  "rating": number
+}

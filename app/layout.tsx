@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Afacad_Flux, DM_Serif_Display } from "next/font/google";
 import { Toaster } from 'react-hot-toast';
 import "./globals.css";
+import { Providers } from "./providers";
 
 const afacadFluxSans = Afacad_Flux({
   variable: "--font-afacad-flux-sans",
@@ -32,7 +33,9 @@ export default function RootLayout({
         <Toaster toastOptions={{
           className: "font-sans"
         }} />
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

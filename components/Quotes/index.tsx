@@ -84,7 +84,7 @@ export default function QuotesList() {
             <QuoteCard author={item.author} text={item.quote}
             />
             <IconWrapper
-              className="mt-3"
+              wrapperClassName="h-fit mt-3"
               IconComponent={TbCopy}
               onClick={handleCopy(item)}
               tooltip={{

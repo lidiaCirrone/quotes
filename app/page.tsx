@@ -1,5 +1,5 @@
 import AddQuoteForm from "@/components/AddQuoteForm";
-import Quotes from "@/components/Quotes";
+import QuotesList from "@/components/Quotes";
 import RandomQuote from "@/components/RandomQuote";
 
 export default function Home() {
@@ -11,7 +11,7 @@ export default function Home() {
           <RandomQuote />
           <AddQuoteForm />
         </div>
-        <Quotes />
+        <QuotesList />
       </section>
     </main>
   );

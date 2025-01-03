@@ -8,7 +8,7 @@ import { ChangeEvent, useContext, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { TbCopy, TbFilterCheck, TbFilterX } from "react-icons/tb";
 
-export default function Quotes() {
+export default function QuotesList() {
 
   const [filter, setFilter] = useState<Filter>({
     saved: "",

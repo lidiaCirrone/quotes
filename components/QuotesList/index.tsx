@@ -4,7 +4,7 @@ import IconWrapper from "@/components/ui/IconWrapper";
 import QuoteCard from "@/components/ui/QuoteCard";
 import { QuotesContext } from "@/store/quotes-provider";
 import { Filter, Quote } from "@/utils/types";
-import { ChangeEvent, useContext, useMemo, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useContext, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { TbCopy, TbFilterCheck, TbFilterX } from "react-icons/tb";
 
@@ -40,6 +40,12 @@ export default function QuotesList() {
     setFilter({ current: "", saved: "" })
   }
 
+  const handleKeyUp = (event: KeyboardEvent) => {
+    if (event.key === "Enter") {
+      handleFilterApply()
+    }
+  }
+
   const onFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFilter(prev => ({ ...prev, current: e.target.value }))
   }
@@ -51,7 +57,7 @@ export default function QuotesList() {
       {allQuotes.length > 0 ? (
         <div className="flex items-center justify-end gap-2 sm:pr-2">
           <label htmlFor="filter" className="shrink-0">Filter by: </label>
-          <input type="text" name="filter" id="filter" className="w-full border-2 rounded-lg border-grey" value={filter.current} onChange={onFilterChange} />
+          <input type="text" name="filter" id="filter" className="w-full border-2 rounded-lg border-grey" value={filter.current} onChange={onFilterChange} onKeyUp={handleKeyUp} />
           <IconWrapper
             disabled={filter.current.trim() === ""}
             IconComponent={TbFilterCheck}
@@ -79,7 +85,7 @@ export default function QuotesList() {
       )}
 
       <div className="flex flex-col gap-4 sm:overflow-y-auto sm:pr-2">
-        {filteredQuotes.sort((a, b) => b.date - a.date).length > 0 ? filteredQuotes.sort((a, b) => b.date - a.date).map((item: Quote, i: number) => (
+        {filteredQuotes.length > 0 ? filteredQuotes.sort((a, b) => b.date - a.date).map((item: Quote, i: number) => (
           <div key={`quote-${i}`} className="flex gap-2">
             <QuoteCard author={item.author} text={item.quote}
             />

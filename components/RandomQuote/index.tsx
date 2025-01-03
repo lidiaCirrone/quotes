@@ -13,6 +13,7 @@ import {
   ModalHeader,
   useDisclosure
 } from "@nextui-org/modal";
+import { Spinner } from "@nextui-org/spinner";
 import clsx from "clsx";
 import { useContext, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
@@ -76,11 +77,13 @@ export default function RandomQuote() {
     onClose()
   }
 
-  if (hideRandomQuote || !randomQuote) return null
+  if (hideRandomQuote) return null
 
   const RandomQuoteCard = () => {
     const iconWrapperClassName = "bg-gray-100 sm:bg-transparent p-2 sm:p-0 rounded-lg shrink-0 w-full sm:w-auto flex gap-2"
-    return (<>
+    return !randomQuote ? (
+      <Spinner className="w-full h-40" color="default" />
+    ) : (<>
       <QuoteCard author={randomQuote.quoteAuthor} text={randomQuote.quoteText} className="max-h-[45vh] sm:max-h-none overflow-y-auto sm:overflow-y-visible" />
       <div className="flex flex-col justify-between gap-4 sm:gap-2">
         <div className="flex flex-col gap-2">

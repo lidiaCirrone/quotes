@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import type { Metadata } from "next";
 import { Afacad_Flux, DM_Serif_Display } from "next/font/google";
 import { Toaster } from 'react-hot-toast';
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${afacadFluxSans.variable} ${dmSerifDisplay.variable} antialiased`}
+        className={clsx(`${afacadFluxSans.variable} ${dmSerifDisplay.variable} antialiased`, "sm:overflow-y-hidden")}
       >
         <Toaster toastOptions={{
           className: "font-sans"

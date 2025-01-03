@@ -81,7 +81,7 @@ export default function RandomQuote() {
   const RandomQuoteCard = () => {
     const iconWrapperClassName = "bg-gray-100 sm:bg-transparent p-2 sm:p-0 rounded-lg shrink-0 w-full sm:w-auto flex gap-2"
     return (<>
-      <QuoteCard author={randomQuote.quoteAuthor} text={randomQuote.quoteText} className="max-h-[45vh] sm:max-h-none md:max-w-80 overflow-y-auto sm:overflow-y-visible" />
+      <QuoteCard author={randomQuote.quoteAuthor} text={randomQuote.quoteText} className="max-h-[45vh] sm:max-h-none overflow-y-auto sm:overflow-y-visible" />
       <div className="flex flex-col justify-between gap-4 sm:gap-2">
         <div className="flex flex-col gap-2">
           {
@@ -156,7 +156,7 @@ export default function RandomQuote() {
           </>
         </ModalContent>
       </Modal>
-      <div className="sm:flex gap-2 mb-8 hidden">
+      <div className="sm:flex gap-2 hidden">
         <RandomQuoteCard />
       </div>
     </>

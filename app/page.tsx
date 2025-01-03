@@ -1,5 +1,5 @@
 import AddQuoteForm from "@/components/AddQuoteForm";
-import QuotesList from "@/components/Quotes";
+import QuotesList from "@/components/QuotesList";
 import RandomQuote from "@/components/RandomQuote";
 
 export default function Home() {

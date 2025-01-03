@@ -8,6 +8,7 @@ interface IconWrapperProps {
   className?: string,
   disabled?: boolean,
   IconComponent: IconType,
+  mobileLabel?: boolean,
   onClick?: () => void,
   size?: number,
   tooltip?: {
@@ -15,37 +16,46 @@ interface IconWrapperProps {
     place?: PlacesType,
     text: string
   }
+  wrapperClassName?: string,
 }
 
 export default function IconWrapper({
   className,
   disabled = false,
   IconComponent,
+  mobileLabel = false,
   onClick,
   size = 20,
-  tooltip
+  tooltip,
+  wrapperClassName,
 }: IconWrapperProps) {
 
   return (
-    <>
+    <div
+      className={clsx(
+        wrapperClassName,
+        disabled ? "opacity-30" : "hover:opacity-80 cursor-pointer"
+      )}
+      {...(!disabled && onClick) && { onClick }}
+      {...tooltip && { id: tooltip.triggerId }}
+    >
       {(tooltip && !disabled) &&
         <Tooltip
           anchorSelect={`#${tooltip.triggerId}`}
+          className="hidden sm:flex"
           place={tooltip.place ?? 'bottom'}
         >
           {tooltip.text}
         </Tooltip>
       }
       <IconComponent
-        {...(!disabled && onClick) && { onClick }}
         className={clsx(
           "focus:outline-none",
-          disabled ? "opacity-30" : "hover:opacity-80 cursor-pointer",
           className
         )}
         size={size}
-        {...tooltip && { id: tooltip.triggerId }}
       />
-    </>
+      {mobileLabel && <span className="sm:hidden">{tooltip?.text ?? ""}</span>}
+    </div>
   )
 }

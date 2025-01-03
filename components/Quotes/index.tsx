@@ -91,8 +91,8 @@ export default function Quotes() {
 
       {allQuotes.length > 0 && (
         <div className="flex items-center justify-end gap-2 mt-8">
-          <label htmlFor="filter">Filter by: </label>
-          <input type="text" name="filter" id="filter" className="w-28 border-2 rounded-lg border-grey" value={filter.current} onChange={onFilterChange} />
+          <label htmlFor="filter" className="shrink-0">Filter by: </label>
+          <input type="text" name="filter" id="filter" className="w-full sm:w-28 border-2 rounded-lg border-grey" value={filter.current} onChange={onFilterChange} />
           <IconWrapper
             disabled={filter.current.trim() === ""}
             IconComponent={TbFilterCheck}

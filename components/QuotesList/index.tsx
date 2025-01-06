@@ -58,7 +58,7 @@ export default function QuotesList() {
         <>
           <div className="flex items-center justify-end gap-2 sm:p-2">
             <label htmlFor="filter" className="shrink-0">Filter by: </label>
-            <input type="text" name="filter" id="filter" className="w-full border-2 rounded-lg border-grey" value={filter.current} onChange={onFilterChange} onKeyUp={handleKeyUp} />
+            <input type="text" name="filter" id="filter" className="w-full border-2 rounded-lg border-grey" value={filter.current} onChange={onFilterChange} onKeyUp={handleKeyUp} data-cy="quotes-filter" />
             <IconWrapper
               disabled={filter.current.trim() === ""}
               IconComponent={TbFilterCheck}

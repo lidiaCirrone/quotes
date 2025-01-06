@@ -3,6 +3,7 @@
 import IconWrapper from "@/components/ui/IconWrapper";
 import QuoteCard from "@/components/ui/QuoteCard";
 import { QuotesContext } from "@/store/quotes-provider";
+import { getFormattedAuthorName } from "@/utils/formatting";
 import { Filter, Quote } from "@/utils/types";
 import { ChangeEvent, KeyboardEvent, useContext, useMemo, useState } from "react";
 import toast from "react-hot-toast";
@@ -24,8 +25,7 @@ export default function QuotesList() {
 
   const handleCopy = (item: Quote) => () => {
     try {
-      navigator.clipboard.writeText(`${item.quote}
-(Author ${item.author !== "" ? item.author : 'unknown'})`)
+      navigator.clipboard.writeText(`${item.quote}\n(Author ${getFormattedAuthorName(item.author)})`)
       toast.success("The quote was successfully copied!", {})
     } catch (error) {
       toast.error("Something went wrong :(")

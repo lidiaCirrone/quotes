@@ -78,9 +78,11 @@ export default function QuotesList() {
             />
           </div>
 
-          <div className="flex flex-col gap-4 sm:overflow-y-auto sm:p-2">
+          <div className="flex flex-col gap-4 sm:overflow-y-auto sm:p-2" data-cy="quotes-list">
             {filteredQuotes.length > 0 ? filteredQuotes.sort((a, b) => b.date - a.date).map((item: Quote, i: number) => (
-              <div key={`quote-${i}`} className="flex gap-2">
+              <div key={`quote-${i}`} className="flex gap-2"
+                data-cy-quote-date={item.date}
+              >
                 <QuoteCard author={item.author} text={item.quote}
                 />
                 <IconWrapper

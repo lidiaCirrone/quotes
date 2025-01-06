@@ -38,6 +38,7 @@ export default function IconWrapper({
       )}
       {...(!disabled && onClick) && { onClick }}
       {...tooltip && { id: tooltip.triggerId }}
+      data-cy="quote-copy-button"
     >
       {(tooltip && !disabled) &&
         <Tooltip

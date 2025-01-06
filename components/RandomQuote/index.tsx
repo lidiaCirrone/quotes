@@ -26,7 +26,7 @@ export default function RandomQuote() {
 
   const { allQuotes, setAllQuotes } = useContext(QuotesContext)
   const [randomQuote, setRandomQuote] = useState<RandomQuoteFromApi | null>(null)
-  const [hideRandomQuote, setHideRandomQuote] = useState<boolean | null>(webStorage.get(HIDE_RANDOM_QUOTE))
+  const [hideRandomQuote, setHideRandomQuote] = useState<boolean | null>(true)
 
 
   const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure();
@@ -47,7 +47,9 @@ export default function RandomQuote() {
   }
 
   useEffect(() => {
-    if (!hideRandomQuote)
+    const storedHideRandomQuote = webStorage.get(HIDE_RANDOM_QUOTE) ?? false
+    setHideRandomQuote(storedHideRandomQuote)
+    if (!storedHideRandomQuote)
       getRandomQuote()
   }, [])
 

@@ -1,19 +1,18 @@
 /* 
-  There is a free text area where I can paste or write the quote I want to save
-  There is a text area in which I can write author's name (not mandatory, in case the quote is by anonymous)
-  The saved quote is instantly listed under the text area, newer quotes first
-  Scrolling down the list I can see all my saved quotes, with author's name
+    - There is a free text area where I can paste or write the quote I want to save
+    - There is a text area in which I can write author's name (not mandatory, in case the quote is by anonymous)
+    - The saved quote is instantly listed under the text area, newer quotes first
+    - Scrolling down the list I can see all my saved quotes, with author's name
  */
 
-describe("Writing and saving new quotes", () => {
-  it("looks for the input fields and fills in the form, adds new quotes to the user's list and shows all of them in chronological order with the newest ones on top", () => {
+describe("Write and save new quotes", () => {
+  it("should find two input fields, fill in the form, add new quotes to the user's list and show all of them in chronological order with the newest ones on top", () => {
     cy.visit("/");
-
     for (let i = 0; i < 3; i++) {
+      cy.get('[data-cy="new-quote-author"]').type("Test user");
       cy.get('[data-cy="new-quote-text"]').type(
         `Lorem ipsum dolor sit amet - ${i + 1}`
       );
-      cy.get('[data-cy="new-quote-author"]').type("Test user");
       cy.get('[data-cy="new-quote-add-button"]').click();
     }
 

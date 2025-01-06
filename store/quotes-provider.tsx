@@ -2,7 +2,7 @@
 
 import { storedQuotes } from '@/utils/storage'
 import { Quote } from '@/utils/types'
-import { createContext, Dispatch, SetStateAction, useState } from 'react'
+import { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 type QuotesContext = {
   allQuotes: Quote[],
@@ -22,7 +22,11 @@ export default function QuotesProvider({
   children: React.ReactNode
 }) {
 
-  const [allQuotes, setAllQuotes] = useState<Quote[]>(storedQuotes.getAll())
+  const [allQuotes, setAllQuotes] = useState<Quote[]>([])
+
+  useEffect(() => {
+    setAllQuotes(storedQuotes.getAll())
+  }, [])
 
   const contextValue = {
     allQuotes,

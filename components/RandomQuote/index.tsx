@@ -17,10 +17,10 @@ import { Spinner } from "@nextui-org/spinner";
 import clsx from "clsx";
 import { useContext, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
-import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { BiHide } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa6";
 import { HiOutlineLightBulb } from "react-icons/hi";
+import { MdOutlineAddCircleOutline, MdOutlineCancel } from "react-icons/md";
 
 export default function RandomQuote() {
 
@@ -32,8 +32,8 @@ export default function RandomQuote() {
   const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure();
 
   const randomQuoteAlreadyAdded = useMemo(
-    () => !hideRandomQuote && randomQuote ? allQuotes.find(item => item.quote === randomQuote?.quoteText) : false,
-    [hideRandomQuote, allQuotes.length, randomQuote?.quoteText]
+    () => !hideRandomQuote && randomQuote ? allQuotes?.find(item => item.quote === randomQuote?.quoteText) : false,
+    [hideRandomQuote, allQuotes?.length, randomQuote?.quoteText]
   )
 
   async function getRandomQuote() {
@@ -63,7 +63,7 @@ export default function RandomQuote() {
         id: storedQuotes.getLastId() + 1,
         quote: randomQuote.quoteText
       }
-      setAllQuotes(prev => ([...prev, newQuote]))
+      setAllQuotes(prev => ([...(prev ?? []), newQuote]))
       storedQuotes.add(newQuote)
       onClose()
     }
@@ -71,6 +71,7 @@ export default function RandomQuote() {
 
   const handleDismiss = () => {
     setRandomQuote(null)
+    setHideRandomQuote(true)
   }
 
   const handleDontShowAnymore = () => {
@@ -82,7 +83,7 @@ export default function RandomQuote() {
   if (hideRandomQuote) return null
 
   const RandomQuoteCard = () => {
-    const iconWrapperClassName = "bg-gray-100 sm:bg-transparent p-2 sm:p-0 rounded-lg shrink-0 w-full sm:w-auto flex gap-2"
+    const iconWrapperClassName = "items-center justify-center bg-gray-100 sm:bg-transparent p-2 sm:p-0 rounded-lg shrink-0 w-full sm:w-auto flex gap-2"
     return !randomQuote ? (
       <Spinner className="w-full h-40" color="default" />
     ) : (<>
@@ -103,7 +104,7 @@ export default function RandomQuote() {
               <>
                 <IconWrapper
                   wrapperClassName={clsx(iconWrapperClassName, "text-green-600")}
-                  IconComponent={AiOutlineLike}
+                  IconComponent={MdOutlineAddCircleOutline}
                   mobileLabel
                   onClick={handleAccept}
                   tooltip={{
@@ -112,8 +113,8 @@ export default function RandomQuote() {
                   }}
                 />
                 <IconWrapper
-                  wrapperClassName={clsx(iconWrapperClassName, "hidden sm:flex text-red-600")}
-                  IconComponent={AiOutlineDislike}
+                  wrapperClassName={clsx(iconWrapperClassName, "!bg-gray-700 sm:!bg-transparent text-white sm:text-black")}
+                  IconComponent={BiHide}
                   mobileLabel
                   onClick={handleDismiss}
                   tooltip={{
@@ -126,8 +127,8 @@ export default function RandomQuote() {
           }
         </div>
         <IconWrapper
-          wrapperClassName={clsx(iconWrapperClassName, "!bg-gray-700 sm:!bg-transparent text-white sm:text-black")}
-          IconComponent={BiHide}
+          wrapperClassName={clsx(iconWrapperClassName, "hidden sm:flex text-red-600")}
+          IconComponent={MdOutlineCancel}
           mobileLabel
           onClick={handleDontShowAnymore}
           tooltip={{

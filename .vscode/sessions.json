@@ -1,0 +1,34 @@
+{
+  "$schema": "https://cdn.statically.io/gh/nguyenngoclongdev/cdn/main/schema/v10/terminal-keeper.json",
+  "theme": "tribe",
+  "active": "default",
+  "activateOnStartup": false,
+  "keepExistingTerminals": false,
+  "sessions": {
+    "default": [
+      {
+        "name": "app",
+        "autoExecuteCommands": false,
+        "commands": [
+          "rm -rf .next",
+          "npm run dev"
+        ]
+      },
+      {
+        "name": "build",
+        "autoExecuteCommands": false,
+        "commands": [
+          "npm run build",
+          "npm run start"
+        ]
+      },
+      {
+        "name": "cypress",
+        "autoExecuteCommands": false,
+        "commands": [
+          "npm run cypress:open"
+        ]
+      }
+    ]
+  }
+}

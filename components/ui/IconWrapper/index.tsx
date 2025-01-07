@@ -17,6 +17,7 @@ interface IconWrapperProps {
     text: string
   }
   wrapperClassName?: string,
+  dataCy?: string
 }
 
 export default function IconWrapper({
@@ -28,6 +29,7 @@ export default function IconWrapper({
   size = 20,
   tooltip,
   wrapperClassName,
+  dataCy
 }: IconWrapperProps) {
 
   return (
@@ -38,7 +40,7 @@ export default function IconWrapper({
       )}
       {...(!disabled && onClick) && { onClick }}
       {...tooltip && { id: tooltip.triggerId }}
-      data-cy="quote-copy-button"
+      {...dataCy && { "data-cy": dataCy }}
     >
       {(tooltip && !disabled) &&
         <Tooltip

@@ -93,6 +93,7 @@ export default function QuotesList() {
                     triggerId: "copy-quote-tooltip",
                     text: "Copy this quote"
                   }}
+                  dataCy="quote-copy-button"
                 />
               </div>
             )) :

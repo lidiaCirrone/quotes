@@ -87,7 +87,7 @@ export default function RandomQuote() {
       <Spinner className="w-full h-40" color="default" />
     ) : (<>
       <QuoteCard author={randomQuote.quoteAuthor} text={randomQuote.quoteText} className="max-h-[45vh] sm:max-h-none overflow-y-auto sm:overflow-y-visible" />
-      <div className="flex flex-col justify-between gap-4 sm:gap-2">
+      <div className="flex flex-col justify-between gap-4 sm:gap-2" data-cy="random-quote">
         <div className="flex flex-col gap-2">
           {
             randomQuoteAlreadyAdded ?
@@ -120,6 +120,7 @@ export default function RandomQuote() {
                     triggerId: "dismiss-tooltip",
                     text: "Hide this quote"
                   }}
+                  dataCy="random-quote-dismiss-button"
                 />
               </>
           }

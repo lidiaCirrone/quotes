@@ -1,6 +1,6 @@
 'use client'
 
-import { QuotesContext } from "@/store/quotes-provider";
+import { AllQuotes, QuotesContext } from "@/store/quotes-provider";
 import { storedQuotes } from "@/utils/storage";
 import { Quote } from "@/utils/types";
 import clsx from "clsx";
@@ -29,7 +29,7 @@ export default function AddQuoteForm() {
       id: storedQuotes.getLastId() + 1,
       quote: quoteData.quote
     }
-    setAllQuotes((prev: Quote[]) => ([...prev, newQuote]))
+    setAllQuotes((prev: AllQuotes) => ([...(prev || []), newQuote]))
     storedQuotes.add(newQuote)
     setQuoteData(emptyQuote)
   }

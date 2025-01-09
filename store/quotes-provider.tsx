@@ -4,7 +4,7 @@ import { storedQuotes } from '@/utils/storage'
 import { Quote } from '@/utils/types'
 import { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-type AllQuotes = Quote[] | null
+export type AllQuotes = Quote[] | null
 
 interface QuotesContext {
   allQuotes: AllQuotes,

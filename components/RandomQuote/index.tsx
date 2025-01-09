@@ -111,6 +111,7 @@ export default function RandomQuote() {
                     triggerId: "accept-tooltip",
                     text: "Add this quote to your list"
                   }}
+                  dataCy="random-quote-add-button"
                 />
                 <IconWrapper
                   wrapperClassName={clsx(iconWrapperClassName, "!bg-gray-700 sm:!bg-transparent text-white sm:text-black")}

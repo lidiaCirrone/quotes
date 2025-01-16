@@ -1,6 +1,15 @@
 export const getFormattedAuthorName = (string: string) => {
-  if (!string) return "unknown";
   const names = string.split(" ");
-  if (names.length > 2) return string;
-  return `${names[0][0]}. ${names[1]}`;
+  if (names.length === 1) return string;
+  const formattedName = names.map((part, i) =>
+    i === names.length - 1 || !/\p{Lu}/u.test(part)
+      ? part
+      : `${part.slice(0, 1)}.`
+  );
+  return formattedName.join(" ");
+};
+
+export const getAuthorString = (name: string) => {
+  if (!name) return `\n(unknown author)`;
+  return `\n(Author ${getFormattedAuthorName(name)})`;
 };

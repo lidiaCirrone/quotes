@@ -20,8 +20,11 @@ export default function QuotesList() {
   const { allQuotes } = useContext(QuotesContext)
 
   const filteredQuotes = useMemo(() => {
-    const keywords = filter.saved.split(" ")
-    return allQuotes?.filter(item => filter.saved === "" || (keywords.some(word => item.author.toLowerCase().includes(word.toLowerCase()) || item.quote.toLowerCase().includes(word.toLowerCase())))) ?? []
+    if (filter.saved.trim() === "") return allQuotes ?? []
+    let keywords: string | string[] = filter.saved.trim().split(" ")
+    keywords = keywords.join("|");
+    const filterRegExp = new RegExp(`\\b(${keywords})\\b`, "i");
+    return allQuotes?.filter(item => item.author.match(filterRegExp) || item.quote.match(filterRegExp)) ?? []
   }, [allQuotes?.length, filter.saved, filter.current])
 
   const handleCopy = (item: Quote) => () => {

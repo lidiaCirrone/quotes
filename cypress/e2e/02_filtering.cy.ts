@@ -1,3 +1,31 @@
+interface MockedQuote {
+  author: string;
+  text: string;
+}
+
+function addStartingQuotes(fixtureName: string) {
+  cy.fixture(fixtureName).then((quotes: MockedQuote[]) => {
+    for (let i = 0; i < quotes.length; i++) {
+      if (quotes[i].author.length > 0)
+        cy.get('[data-cy="new-quote-author"]').type(quotes[i].author);
+      cy.get('[data-cy="new-quote-text"]').type(quotes[i].text);
+      cy.get('[data-cy="new-quote-add-button"]').click();
+    }
+  });
+}
+
+function checkFilteredQuotes(filterString: string) {
+  const keywords = filterString.replaceAll(" ", "|");
+  const filterRegExp = new RegExp(`\\b(${keywords})\\b`, "i");
+  cy.get("[data-cy='quotes-filter'").type(filterString);
+  cy.get("[data-cy='quotes-filter'").type("{enter}");
+  cy.get('[data-cy="quotes-list"]')
+    .children()
+    .each(quote => {
+      expect(quote.text()).to.match(filterRegExp);
+    });
+}
+
 /*
     - I must see a text field somewhere near my list.
     - When I write text in there, the list must be filtered by the words in there.
@@ -8,47 +36,16 @@
 describe("Filter quotes", () => {
   it("should filter the quotes list using the word(s) typed in the input field, using them as separate keywords", () => {
     cy.visit("/");
-    cy.fixture("filter").then(allQuotes => {
-      const quotes = allQuotes.oneTwoThree;
-      for (let i = 0; i < quotes.length; i++) {
-        cy.get('[data-cy="new-quote-text"]').type(quotes[i].text);
-        cy.get('[data-cy="new-quote-add-button"]').click();
-      }
-    });
+    addStartingQuotes("filtering_oneTwoThree");
 
     const filterString = "one two three";
-    const keywords = filterString.replaceAll(" ", "|");
-    const filterRegExp = new RegExp(`(${keywords})`, "i");
-    cy.get("[data-cy='quotes-filter'").type(filterString);
-    cy.get("[data-cy='quotes-filter'").type("{enter}");
-    cy.get('[data-cy="quotes-list"]')
-      .children()
-      .each(quote => {
-        expect(quote.text()).to.match(filterRegExp);
-      });
+    checkFilteredQuotes(filterString);
     cy.pause();
   });
 
   it("should filter the quotes list using the word(s) typed in the input field, searching both in the text and the author string", () => {
     cy.visit("/");
-    cy.fixture("filter").then(allQuotes => {
-      const quotes = allQuotes.einstein;
-      for (let i = 0; i < quotes.length; i++) {
-        if (quotes[i].author.length > 0)
-          cy.get('[data-cy="new-quote-author"]').type(quotes[i].author);
-        cy.get('[data-cy="new-quote-text"]').type(quotes[i].text);
-        cy.get('[data-cy="new-quote-add-button"]').click();
-      }
-    });
-
-    const filterString = "einstein";
-    const filterRegExp = new RegExp(`(${filterString})`, "i");
-    cy.get("[data-cy='quotes-filter'").type(filterString);
-    cy.get("[data-cy='quotes-filter'").type("{enter}");
-    cy.get('[data-cy="quotes-list"]')
-      .children()
-      .each(quote => {
-        expect(quote.text()).to.match(filterRegExp);
-      });
+    addStartingQuotes("filtering_einstein");
+    checkFilteredQuotes("einstein");
   });
 });

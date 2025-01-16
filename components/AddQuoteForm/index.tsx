@@ -24,10 +24,10 @@ export default function AddQuoteForm() {
 
   const addQuote = () => {
     const newQuote = {
-      author: quoteData.author,
+      author: quoteData.author.trim(),
       date: Date.now(),
       id: storedQuotes.getLastId() + 1,
-      quote: quoteData.quote
+      quote: quoteData.quote.trim()
     }
     setAllQuotes((prev: AllQuotes) => ([...(prev || []), newQuote]))
     storedQuotes.add(newQuote)
